@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\TodoController;
 
 /*
 |-----------------------------------------------------------------:"
@@ -22,10 +24,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::prefix('v1')->group(function () {
-    Route::apiResource('album', \App\Http\Controllers\AlbumController::class);
+    Route::apiResource('album', AlbumController::class);
+    Route::apiResource('todo', TodoController::class);
 });
-
-
 
 Route::get('/', function (Request $request) {
     return uniqid();

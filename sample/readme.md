@@ -29,4 +29,17 @@ https://laravel.com/docs/9.x/migrations#migration-structure
 > php artisan make:model ModelName -m
 
 ## create controller with model for API
+### when --api is used the controller will get created with the actions store, update, index, show and destroy
+>php artisan make:controller AlbumController --model=Album --requests --api
+
+## create controller with model with resource
+### when --resource is used the controller will get created the actions methods create,store,edit,update,index,show and destroy
 >php artisan make:controller PhotoController --model=Photo --resource --requests
+
+
+## create table migration manually
+>php artisan make:migration create_todos_table
+
+
+## create resource
+>php artisan make:resource V1\\AlbumResource
