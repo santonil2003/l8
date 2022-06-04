@@ -32,6 +32,8 @@ https://laravel.com/docs/9.x/migrations#migration-structure
 ### when --api is used the controller will get created with the actions store, update, index, show and destroy
 >php artisan make:controller AlbumController --model=Album --requests --api
 
+### if you wish to specify the namespace, you can do something like
+>php artisan make:controller V1\\AlbumController --model=Album --requests --api
 ## create controller with model with resource
 ### when --resource is used the controller will get created the actions methods create,store,edit,update,index,show and destroy
 >php artisan make:controller PhotoController --model=Photo --resource --requests
