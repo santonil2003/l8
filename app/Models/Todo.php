@@ -13,6 +13,8 @@ class Todo extends Model
 {
     use HasFactory;
 
+    protected $perPage = 10;
+
     // only needed for mass assignment ..e.g. Todo::craete(['name'=>'...']);
     protected $fillable = ['name'];
 }

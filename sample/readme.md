@@ -45,3 +45,7 @@ https://laravel.com/docs/9.x/migrations#migration-structure
 
 ## create resource
 >php artisan make:resource V1\\AlbumResource
+
+
+## add additional column to existing table
+>php artisan make:migration add_{COLUMN_NAME}_to_{TABLE_NAME}_table --table={TABLE_NAME}

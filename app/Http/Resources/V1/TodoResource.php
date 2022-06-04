@@ -4,7 +4,7 @@ namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AlbumResource extends JsonResource
+class TodoResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,11 +14,6 @@ class AlbumResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'created_at' => $this->created_at
-        ];
-        // return parent::toArray($request);
+        return parent::toArray($request);
     }
 }
