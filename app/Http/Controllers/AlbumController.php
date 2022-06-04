@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAlbumRequest;
 use App\Http\Requests\UpdateAlbumRequest;
 use App\Models\Album;
+use Illuminate\Http\JsonResponse;
 
 class AlbumController extends Controller
 {
@@ -15,8 +16,7 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        //
-        return uniqid('index');
+        return Album::all();
     }
 
     /**
@@ -38,7 +38,7 @@ class AlbumController extends Controller
      */
     public function show(Album $album)
     {
-        //
+        return $album;
     }
 
     /**
@@ -50,17 +50,18 @@ class AlbumController extends Controller
      */
     public function update(UpdateAlbumRequest $request, Album $album)
     {
-        //
+        $album->update($request->all());
+        return $album;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Album $album
-     * @return \Illuminate\Http\Response
+     * @throws \Throwable
      */
     public function destroy(Album $album)
     {
-        //
+        $album->deleteOrFail();
+        return response('', '204');
     }
 }
