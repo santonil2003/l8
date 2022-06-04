@@ -21,6 +21,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/', function(Request $request){
-   return  uniqid();
+Route::prefix('v1')->group(function () {
+    Route::apiResource('album', \App\Http\Controllers\AlbumController::class);
+});
+
+
+
+Route::get('/', function (Request $request) {
+    return uniqid();
 });

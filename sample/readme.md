@@ -27,3 +27,6 @@ https://laravel.com/docs/9.x/migrations#migration-structure
 
 # Create model, with migration
 > php artisan make:model ModelName -m
+
+## create controller with model for API
+>php artisan make:controller PhotoController --model=Photo --resource --requests
