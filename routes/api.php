@@ -28,6 +28,10 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('todo', TodoController::class);
 });
 
-Route::get('/', function (Request $request) {
-    return uniqid();
+
+Route::middleware(['throttle:my_rate_limiter_name'])->group(function () {
+    Route::get('/', function (Request $request) {
+        return uniqid();
+    });
 });
+

@@ -49,3 +49,7 @@ https://laravel.com/docs/9.x/migrations#migration-structure
 
 ## add additional column to existing table
 >php artisan make:migration add_{COLUMN_NAME}_to_{TABLE_NAME}_table --table={TABLE_NAME}
+
+
+# Laravel breeze for auth features such as register, login , reset password etc.
+> composer require laravel/breeze --dev
