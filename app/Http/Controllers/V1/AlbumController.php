@@ -36,8 +36,13 @@ class AlbumController extends Controller
 
         $thumbnail = $request->file('image');
 
+
         if ($thumbnail instanceof UploadedFile) {
-            $data['thumbnail'] = $thumbnail->store('thumbnail');
+            // the file will be uploaded in storage/app/public,
+            // To make these files accessible from the web, you should create a symbolic link from public/storage to storage/app/public
+            // https://laravel.com/docs/9.x/filesystem#file-urls, use following command to create symbolic link
+            // php artisan storage:link
+            $data['thumbnail'] = $thumbnail->storePublicly('public/thumbnail');
         }
 
         $album = Album::create($data);

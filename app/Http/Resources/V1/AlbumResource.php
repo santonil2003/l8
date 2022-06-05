@@ -3,6 +3,7 @@
 namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class AlbumResource extends JsonResource
 {
@@ -17,6 +18,8 @@ class AlbumResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'thumbnail' => $this->thumbnail,
+            'url' => Storage::url($this->thumbnail),
             'created_at' => $this->created_at
         ];
         // return parent::toArray($request);
