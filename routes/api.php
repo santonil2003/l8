@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\V1\AlbumController;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\V1\UserController;
 
 /*
 |-----------------------------------------------------------------:"
@@ -23,6 +24,28 @@ use App\Http\Controllers\TodoController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+
+Route::prefix('v1')->group(function(){
+
+    // protected route based on sanctum token and ability....
+
+    /**
+    $token = $user->createToken($request->token_name ?? $request->email, ['user.show','user.index']);
+    return response(['token' => $token->plainTextToken]);
+     */
+    /*
+    Route::middleware(['auth:sanctum', 'abilities:user.index,user.show,user.delete'])->group(function(){
+       Route::apiResource('user', UserController::class);
+    });*/
+
+    Route::middleware(['auth:sanctum', 'ability:user.index,user.show,user.delete'])->group(function(){
+        Route::apiResource('user', UserController::class);
+    });
+
+    Route::post('user/store', [UserController::class, 'store']);
+    Route::post('user/login', [UserController::class, 'login']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {
