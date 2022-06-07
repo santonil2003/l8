@@ -64,3 +64,8 @@ Route::middleware(['throttle:my_rate_limiter_name'])->group(function () {
     });
 });
 
+
+Route::get('/test/{one}/{two}/{three}', function ($one, $two, $three) {
+    return $one . '-' . $two . '-' . $three;
+});
+
