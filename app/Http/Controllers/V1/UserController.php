@@ -7,7 +7,12 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\V1\UserResource;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends Controller
 {
@@ -53,7 +58,20 @@ class UserController extends Controller
             }
         }
 
-        return response('Invalid username or password.', 404);
+        throw ValidationException::withMessages([
+            'email' => ['The provided credentials are incorrect.'],
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        //$result = $request->user()->currentAccessToken()->delete();
+        $result = $request->user()->tokens()->delete(); // if you want to delete all the tokens for the user..
+        if ($request) {
+            return response('Bye Bye', Response::HTTP_OK);
+        }
+
+        throw NotFoundHttpException::widthMessage(['message'=>'faild to logout']);
     }
 
     /**
@@ -62,9 +80,19 @@ class UserController extends Controller
      * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, Request $request)
     {
-        return $user;
+
+        //Log::debug('this is info log');
+
+        //dd($request);
+
+        // $currentUser = request()->user();
+        if ($request->user()->tokenCan('user.show')) {
+            return $user;
+        }
+
+        return response('Access denied!', Response::HTTP_FORBIDDEN);
     }
 
     /**
