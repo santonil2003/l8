@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,19 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard-v2', [\App\Http\Controllers\DashboardV2Controller::class, 'index'])
+        ->name('dashboard-v2');
+
+    Route::get('/dashboard-v2/generate-token', function (Request $request) {
+        if (!empty($request->token_name)) {
+            $token = $request->user()->createToken($request->token_name);
+            return ['token' => $token->plainTextToken];
+        }
+
+        return 'Please specify the token_name in url';
+    });
+});
+
+
+require __DIR__ . '/auth.php';

@@ -18,16 +18,19 @@ use App\Http\Controllers\TodoController;
 |
 */
 
+
+// protected route..
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::prefix('v1')->group(function () {
-    Route::apiResource('album', AlbumController::class);
-    Route::apiResource('todo', TodoController::class);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix('v1')->group(function () {
+        Route::apiResource('album', AlbumController::class);
+        Route::apiResource('todo', TodoController::class);
+    });
 });
-
 
 Route::middleware(['throttle:my_rate_limiter_name'])->group(function () {
     Route::get('/', function (Request $request) {
