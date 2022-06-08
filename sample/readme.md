@@ -53,3 +53,8 @@ https://laravel.com/docs/9.x/migrations#migration-structure
 
 # Laravel breeze for auth features such as register, login , reset password etc.
 > composer require laravel/breeze --dev
+
+
+#create seeder and run seeder
+>php artisan make:seeder PostSeeder
+>php artisan db:seed --class=PostSeeder
