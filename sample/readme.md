@@ -58,3 +58,22 @@ https://laravel.com/docs/9.x/migrations#migration-structure
 #create seeder and run seeder
 >php artisan make:seeder PostSeeder
 >php artisan db:seed --class=PostSeeder
+
+
+#create service provider
+>php artisan make:provider RiakServiceProvider
+## once service provider is generated, the you will need to register it in config/app.php inside provider array,,
+
+
+
+#create request
+> php artisan make:request NewProductRequest
+
+> php artisan make:migration add_description_to_products_table --table=products
+
+> php artisan make:migration create_product_tag_table --create=product_tag
+
+>  php artisan make:migration add_unique_index_to_name_col_in_products_table --table=products
+
+
+

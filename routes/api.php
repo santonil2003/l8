@@ -65,7 +65,9 @@ Route::middleware(['throttle:my_rate_limiter_name'])->group(function () {
 });
 
 
-Route::get('/test/{one}/{two}/{three}', function ($one, $two, $three) {
-    return $one . '-' . $two . '-' . $three;
+Route::get('/test/{mobile}/{message}', function (string $mobile, string $message, \App\Services\SmsService $smsService) {
+
+    $smsService->send($mobile, $message);
+    return [$mobile, $message];
 });
 
