@@ -1,15 +1,4 @@
 <?php
-
-
-class car {
-    static $model = 'yaris';
-}
-
-
-echo car::$model;
-exit;
-
-
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
